@@ -22,3 +22,7 @@ Backend service that having the following technical requirements:
 Controller(Handler)->Service->Data(Repository).
 * Test coverage should be at least %85.
 * Free to use any DB(In-Memory(no-db), SQL, NoSQL)
+
+
+mockgen -source repository/wallet_repository.go -destination mock/mock_wallet_repository.go -package mock WalletRepository
+mockgen -source service/wallet_service.go -destination mock/mock_wallet_service.go -package mock WalletService
