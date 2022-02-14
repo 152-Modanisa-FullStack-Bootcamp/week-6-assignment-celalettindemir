@@ -70,7 +70,7 @@ func TestGetAllWallets(t *testing.T) {
 		assert.Equal(t, http.StatusInternalServerError, res.Result().StatusCode)
 	})
 }
-func TestWalletOperation(t *testing.T) {
+func TestGetWalletByUsername(t *testing.T) {
 	t.Run("only GET method allowed", func(t *testing.T) {
 		mockService := mock.NewMockWalletService(gomock.NewController(t))
 		mockService.EXPECT().
@@ -80,7 +80,7 @@ func TestWalletOperation(t *testing.T) {
 		wallet_Controller := NewWalletController(mockService)
 		req := httptest.NewRequest(http.MethodGet, "/celal", http.NoBody)
 		res := httptest.NewRecorder()
-		wallet_Controller.WalletOperation(res, req)
+		wallet_Controller.GetWalletByUsername(res, req)
 		assert.Equal(t, http.StatusOK, res.Result().StatusCode)
 	})
 	t.Run("POST not allowed", func(t *testing.T) {
@@ -89,7 +89,7 @@ func TestWalletOperation(t *testing.T) {
 		req := httptest.NewRequest(http.MethodPost, "/", http.NoBody)
 		res := httptest.NewRecorder()
 
-		wallet_Controller.WalletOperation(res, req)
+		wallet_Controller.GetWalletByUsername(res, req)
 		assert.Equal(t, http.StatusNotImplemented, res.Result().StatusCode)
 	})
 	t.Run("Find user", func(t *testing.T) {
@@ -103,7 +103,7 @@ func TestWalletOperation(t *testing.T) {
 		req := httptest.NewRequest(http.MethodGet, "/celal", http.NoBody)
 		res := httptest.NewRecorder()
 
-		wallet_Controller.WalletOperation(res, req)
+		wallet_Controller.GetWalletByUsername(res, req)
 
 		assert.Equal(t, http.StatusOK, res.Result().StatusCode)
 		assert.Equal(t, "application/json; charset=UTF-8", res.Result().Header.Get("content-type"))
@@ -126,7 +126,7 @@ func TestWalletOperation(t *testing.T) {
 		req := httptest.NewRequest(http.MethodGet, "/celalettin", http.NoBody)
 		res := httptest.NewRecorder()
 
-		wallet_Controller.WalletOperation(res, req)
+		wallet_Controller.GetWalletByUsername(res, req)
 
 		assert.Equal(t, http.StatusNotFound, res.Result().StatusCode)
 		assert.Equal(t, "User not found", string(res.Body.Bytes()))
