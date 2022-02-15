@@ -23,6 +23,7 @@ func init() {
 	mainPath := strings.TrimSuffix(path, "controllers")
 	mainPath = strings.TrimSuffix(mainPath, "repository")
 	mainPath = strings.TrimSuffix(mainPath, "service")
+	mainPath = strings.TrimSuffix(mainPath, "handler")
 
 	file, err := os.Open(mainPath + ".config/" + env + ".json")
 	if err != nil {

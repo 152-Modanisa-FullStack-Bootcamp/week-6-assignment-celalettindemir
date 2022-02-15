@@ -43,7 +43,7 @@ func (r *walletRepository) CashOperation(username string, Amount int) (int, erro
 	}
 	if Amount < 0 {
 		if Db[username]+Amount < config.C.MinumumBalanceAmount {
-			return 0, errors.New("Cash can't be withdrawn")
+			return Db[username], errors.New("Cash can't be withdrawn")
 		}
 	}
 	Db[username] += Amount

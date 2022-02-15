@@ -26,3 +26,4 @@ Controller(Handler)->Service->Data(Repository).
 
 mockgen -source repository/wallet_repository.go -destination mock/mock_wallet_repository.go -package mock WalletRepository
 mockgen -source service/wallet_service.go -destination mock/mock_wallet_service.go -package mock WalletService
+mockgen -source controllers/wallet_controller.go -destination mock/mock_wallet_controller.go -package mock WalletController

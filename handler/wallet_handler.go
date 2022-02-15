@@ -25,9 +25,9 @@ func (c *walletHandler) WalletOperation(w http.ResponseWriter, r *http.Request) 
 		}
 	} else if r.Method == http.MethodPost {
 
-		c.wc.CreateWallet(w, r)
+		c.wc.PostWallet(w, r)
 	} else if r.Method == http.MethodPut {
-		c.wc.UpdateWallet(w, r)
+		c.wc.PutWallet(w, r)
 	} else {
 		w.WriteHeader(http.StatusNotImplemented)
 		return
