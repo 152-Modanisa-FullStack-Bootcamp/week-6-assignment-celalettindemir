@@ -2,8 +2,10 @@ package config
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"os"
+	"strings"
 )
 
 type Config struct {
@@ -14,7 +16,15 @@ type Config struct {
 var C = &Config{}
 
 func init() {
-	file, err := os.Open(".config/" + env + ".json")
+	path, err := os.Getwd()
+	if err != nil {
+		fmt.Println(err)
+	}
+	mainPath := strings.TrimSuffix(path, "controllers")
+	mainPath = strings.TrimSuffix(mainPath, "repository")
+	mainPath = strings.TrimSuffix(mainPath, "service")
+
+	file, err := os.Open(mainPath + ".config/" + env + ".json")
 	if err != nil {
 		panic(err)
 	}
